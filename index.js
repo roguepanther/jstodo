@@ -1,6 +1,7 @@
  const userInput = document.querySelector('#taskInput')
  const originalList = document.querySelector('.tasks')
  const moonicon = document.querySelector('#moonIcon')
+ const toDelete = document.querySelector('#delete')
 
  userInput.addEventListener('keydown', (e) => {
     if(e.keyCode === 13){
@@ -29,6 +30,7 @@
     card.classList.add('card');
     card.style.width = '22rem'
     card.style.marginTop = '10px'
+    card.classList.add = 'delete'
     const cardBody = document.createElement('div')
     cardBody.classList.add('card-body')
     cardBody.innerText += message
@@ -41,3 +43,11 @@
     originalList.appendChild(card)
  }
  
+let close = document.querySelectorAll('delete')
+for(let i = 0; i < close.length; i++){
+    close[i].onclick = function() {
+        
+        close[i].parentElement.remove()
+    }
+}
+
