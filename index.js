@@ -38,10 +38,16 @@
     removeIcon.classList.add('fa-solid')
     removeIcon.classList.add('fa-trash')
     removeIcon.style.marginLeft = '50px'
+    removeIcon.setAttribute('id', 'delete')
     cardBody.appendChild(removeIcon)
     card.appendChild(cardBody) 
     originalList.appendChild(card)
+    userInput.value = ''
  }
  
-
+document.body.addEventListener('click', function(event){
+    if(event.target.id == 'delete'){
+        event.target.parentElement.parentElement.remove()
+    }
+})
 
