@@ -27,12 +27,17 @@
  function createCard(message){
     const card = document.createElement('div')
     card.classList.add('card');
-    card.style.width = '18rem'
+    card.style.width = '22rem'
     card.style.marginTop = '10px'
     const cardBody = document.createElement('div')
     cardBody.classList.add('card-body')
     cardBody.innerText += message
-    card.appendChild(cardBody)   
+    const removeIcon = document.createElement('i')
+    removeIcon.classList.add('fa-solid')
+    removeIcon.classList.add('fa-trash')
+    removeIcon.style.marginLeft = '50px'
+    cardBody.appendChild(removeIcon)
+    card.appendChild(cardBody) 
     originalList.appendChild(card)
  }
  
