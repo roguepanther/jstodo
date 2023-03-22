@@ -1,14 +1,16 @@
  const userInput = document.querySelector('#taskInput')
  const originalList = document.querySelector('.tasks')
+ const moonicon = document.querySelector('#moonIcon')
 
  userInput.addEventListener('keydown', (e) => {
     if(e.keyCode === 13){
-        const listItem = document.createElement('li')
-        listItem.innerText = userInput.value
+        // const listItem = document.createElement('li')
+        // listItem.innerText = userInput.value
         if(userInput.value.length === 0){
             console.warn('cannot add empty task')
         } else {
-            originalList.appendChild(listItem);
+            // originalList.appendChild(listItem);
+            createCard(userInput.value);
         }
         console.log(userInput.value)
 
@@ -16,3 +18,21 @@
         console.log('another key pressed')
     }
  })
+
+ moonicon.addEventListener('click', () => {
+    document.body.style.background = 'black'
+    document.body.style.color = 'white'
+ })
+
+ function createCard(message){
+    const card = document.createElement('div')
+    card.classList.add('card');
+    card.style.width = '18rem'
+    card.style.marginTop = '10px'
+    const cardBody = document.createElement('div')
+    cardBody.classList.add('card-body')
+    cardBody.innerText += message
+    card.appendChild(cardBody)   
+    originalList.appendChild(card)
+ }
+ 
