@@ -43,11 +43,5 @@
     originalList.appendChild(card)
  }
  
-let close = document.querySelectorAll('delete')
-for(let i = 0; i < close.length; i++){
-    close[i].onclick = function() {
-        
-        close[i].parentElement.remove()
-    }
-}
+
 
