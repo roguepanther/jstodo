@@ -150,6 +150,7 @@ function removeFromLocalStorage(localitem){
 // When page is refreshed, check if tasks in localstorage exist and if so, display them for the user
 window.onload = function(e) {
    checkLocalStorage()
+   // Every time the page loads, check if tasks exist - if they do, update the span to reflect the number of tasks in progress 
    if(localStorage.getItem('tasks') != '' && localStorage.getItem('tasks') != 'null' ){
     if("tasks" in localStorage){
         const testStorage = JSON.parse(localStorage.getItem('tasks'))
