@@ -73,6 +73,8 @@ originalList.addEventListener('click', function(event){
         let itemToBeRemoved = JSON.stringify(event.target.parentElement.innerText);
         console.log(itemToBeRemoved)
         removeFromLocalStorage(JSON.parse(itemToBeRemoved))
+        const testStorage = JSON.parse(localStorage.getItem('tasks'))
+        taskProgress.innerHTML = testStorage.length
     }
 })
 
@@ -114,6 +116,8 @@ function pushToLocalStorage(localitem){
             // add the temp local array into the localStorage 
             localStorage.setItem('tasks', tempLocal)
             console.log('item has been added to local storage successfully')
+            const testStorage = JSON.parse(localStorage.getItem('tasks'))
+        taskProgress.innerHTML = testStorage.length
         }   
     } else {
         // tasks entry does not exist in local storage 
