@@ -2,10 +2,13 @@
  const originalList = document.querySelector('.tasks')
  const moonicon = document.querySelector('#moonIcon')
  const toDelete = document.querySelector('#delete')
- let items = [];
+ let items = new Array;
+ let tempItems = new Array;
+
 
  userInput.addEventListener('keydown', (e) => {
     if(e.keyCode === 13){
+        
         // const listItem = document.createElement('li')
         // listItem.innerText = userInput.value
         if(userInput.value.length === 0){
@@ -14,11 +17,13 @@
             // originalList.appendChild(listItem);
             // Add localstorage functionality to retrieve items and persist for user
             items.push(userInput.value)
-            localStorage.setItem("tasks",JSON.stringify(items))
             createCard(userInput.value);
             // add item to localstorage array 
         }
         console.log(userInput.value)
+        items = tempItems;
+        localStorage.setItem("tasks",JSON.stringify(tempItems))
+
 
     } else {
         console.log('another key pressed')
@@ -61,14 +66,8 @@
 originalList.addEventListener('click', function(event){
     if(event.target.id == 'delete'){
         event.target.parentElement.parentElement.remove()
-        let itemToBeRemoved = event.target.parentElement.innerText;
-        items.forEach(item => {
-            if(item === itemToBeRemoved){
-                item.pop()
-            } else {
-                console.log('No matching items has been found')
-            }
-        })
+        let itemToBeRemoved = JSON.stringify(event.target.parentElement.innerText);
+        let localStorageArray = localStorage.getItem('tasks')
     }
 })
 
@@ -80,7 +79,7 @@ originalList.addEventListener('click', function(event) {
 })
 
 // When page is refreshed, check if tasks in localstorage exist and if so, display them for the user
-window.onload = function(e) {
+document.body.onload = function(e) {
     if(localStorage.getItem('tasks') != '' && localStorage.getItem('tasks') != 'null' ){
         if("tasks" in localStorage){
             let itemsRetrieved = JSON.parse(localStorage.getItem('tasks'))
@@ -92,3 +91,4 @@ window.onload = function(e) {
 }
 
 
+ 
