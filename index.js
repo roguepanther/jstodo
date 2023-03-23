@@ -5,10 +5,8 @@
  let items = new Array;
  let tempItems = new Array;
 
-
  userInput.addEventListener('keydown', (e) => {
     if(e.keyCode === 13){
-        
         // const listItem = document.createElement('li')
         // listItem.innerText = userInput.value
         if(userInput.value.length === 0){
@@ -16,15 +14,20 @@
         } else {
             // originalList.appendChild(listItem);
             // Add localstorage functionality to retrieve items and persist for user
-            items.push(userInput.value)
+            
+            if(localStorage.getItem('tasks') != '' && localStorage.getItem('tasks') != 'null' ){
+                if("tasks" in localStorage){
+                    let itemsRetrieved = JSON.parse(localStorage.getItem('tasks'))
+
+                }   
+            }
+
             createCard(userInput.value);
             // add item to localstorage array 
         }
         console.log(userInput.value)
         items = tempItems;
         localStorage.setItem("tasks",JSON.stringify(tempItems))
-
-
     } else {
         console.log('another key pressed')
     }
