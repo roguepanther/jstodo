@@ -13,24 +13,23 @@
             console.warn('cannot add empty task')
         } else {
             // originalList.appendChild(listItem);
-            // Add localstorage functionality to retrieve items and persist for user
-            
-            if(localStorage.getItem('tasks') != '' && localStorage.getItem('tasks') != 'null' ){
-                if("tasks" in localStorage){
-                    let itemsRetrieved = JSON.parse(localStorage.getItem('tasks'))
-
-                }   
-            }
-
+            // Add localstorage functionality to retrieve items and persist for user    
+            items.push(userInput.value)
             createCard(userInput.value);
             // add item to localstorage array 
         }
-        console.log(userInput.value)
-        items = tempItems;
-        localStorage.setItem("tasks",JSON.stringify(tempItems))
+        
+        if("tasks" in localStorage){
+            const localStorageVar = JSON.stringify(localStorage.getItem('tasks'));
+            console.log(localStorageVar)
+        } else {
+            localStorage.setItem('tasks', JSON.stringify(items))
+        }
     } else {
         console.log('another key pressed')
     }
+    
+    
  })
 
  moonicon.addEventListener('click', () => {
@@ -81,16 +80,24 @@ originalList.addEventListener('click', function(event) {
     }
 })
 
-// When page is refreshed, check if tasks in localstorage exist and if so, display them for the user
-document.body.onload = function(e) {
+// Function to check the local storage content 
+function checkLocalStorage(){
     if(localStorage.getItem('tasks') != '' && localStorage.getItem('tasks') != 'null' ){
         if("tasks" in localStorage){
             let itemsRetrieved = JSON.parse(localStorage.getItem('tasks'))
             itemsRetrieved.forEach(item => {
+                tempItems.push(item)
                 createCard(item);
             })
+            tempItems = items
+
         }   
     }
+}
+
+// When page is refreshed, check if tasks in localstorage exist and if so, display them for the user
+window.onload = function(e) {
+   checkLocalStorage()
 }
 
 
