@@ -2,6 +2,7 @@
  const originalList = document.querySelector('.tasks')
  const moonicon = document.querySelector('#moonIcon')
  const toDelete = document.querySelector('#delete')
+ const taskProgress = document.querySelector('#progress')
  let items = new Array;
  let tempItems = new Array;
 
@@ -53,14 +54,14 @@
     removeIcon.classList.add('fa-trash')
     removeIcon.style.marginLeft = '50px'
     removeIcon.setAttribute('id', 'delete')
-    cardBody.appendChild(removeIcon)
     const completeIcon = document.createElement('i')
     completeIcon.classList.add('fa-solid')
     completeIcon.classList.add('fa-check')
-    completeIcon.style.marginLeft = '25px'
+    completeIcon.style.marginLeft = '30px'
     completeIcon.setAttribute('id', 'completed')
     cardBody.appendChild(completeIcon)
-    card.appendChild(cardBody) 
+    cardBody.appendChild(removeIcon)
+    card.appendChild(cardBody)
     originalList.appendChild(card)
     userInput.value = ''
  }
@@ -139,9 +140,21 @@ function removeFromLocalStorage(localitem){
     }
 }
 
+// add the ability to show total number of tasks and the progress of completed
+
+
 // When page is refreshed, check if tasks in localstorage exist and if so, display them for the user
 window.onload = function(e) {
    checkLocalStorage()
+   if(localStorage.getItem('tasks') != '' && localStorage.getItem('tasks') != 'null' ){
+    if("tasks" in localStorage){
+        const testStorage = JSON.parse(localStorage.getItem('tasks'))
+        taskProgress.innerHTML = testStorage.length
+    }   
+    } else {
+        // tasks entry does not exist in local storage 
+        console.log('tasks do not exist in local storage ')
+    }
 }
 
 
