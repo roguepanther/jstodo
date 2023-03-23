@@ -2,6 +2,7 @@
  const originalList = document.querySelector('.tasks')
  const moonicon = document.querySelector('#moonIcon')
  const toDelete = document.querySelector('#delete')
+ let items = [];
 
  userInput.addEventListener('keydown', (e) => {
     if(e.keyCode === 13){
@@ -11,7 +12,11 @@
             console.warn('cannot add empty task')
         } else {
             // originalList.appendChild(listItem);
+            // Add localstorage functionality to retrieve items and persist for user
+            items.push(userInput.value)
+            localStorage.setItem("tasks",JSON.stringify(items))
             createCard(userInput.value);
+            // add item to localstorage array 
         }
         console.log(userInput.value)
 
@@ -53,10 +58,12 @@
  }
  
 //Function to remove a task on clicking the corresponding delete button 
-
 originalList.addEventListener('click', function(event){
     if(event.target.id == 'delete'){
         event.target.parentElement.parentElement.remove()
+        let itemToBeRemoved = event.target.parentElement.innerText;
+        const index = items.indexOf(JSON.stringify(itemToBeRemoved))
+        console.log(index)
     }
 })
 
@@ -66,4 +73,15 @@ originalList.addEventListener('click', function(event) {
         const newDiv = event.target.parentElement.classList.add('text-bg-success')
     }
 })
+
+// When page is refreshed, check if tasks in localstorage exist and if so, display them for the user
+window.onload = function(e) {
+    if(localStorage.getItem('tasks') != ''){
+        let itemsRetrieved = JSON.parse(localStorage.getItem('tasks'))
+        itemsRetrieved.forEach(item => {
+            createCard(item);
+        })
+    }
+}
+
 
