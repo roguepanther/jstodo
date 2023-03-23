@@ -62,8 +62,13 @@ originalList.addEventListener('click', function(event){
     if(event.target.id == 'delete'){
         event.target.parentElement.parentElement.remove()
         let itemToBeRemoved = event.target.parentElement.innerText;
-        const index = items.indexOf(JSON.stringify(itemToBeRemoved))
-        console.log(index)
+        items.forEach(item => {
+            if(item === itemToBeRemoved){
+                item.pop()
+            } else {
+                console.log('No matching items has been found')
+            }
+        })
     }
 })
 
@@ -76,11 +81,13 @@ originalList.addEventListener('click', function(event) {
 
 // When page is refreshed, check if tasks in localstorage exist and if so, display them for the user
 window.onload = function(e) {
-    if(localStorage.getItem('tasks') != ''){
-        let itemsRetrieved = JSON.parse(localStorage.getItem('tasks'))
-        itemsRetrieved.forEach(item => {
-            createCard(item);
-        })
+    if(localStorage.getItem('tasks') != '' && localStorage.getItem('tasks') != 'null' ){
+        if("tasks" in localStorage){
+            let itemsRetrieved = JSON.parse(localStorage.getItem('tasks'))
+            itemsRetrieved.forEach(item => {
+                createCard(item);
+            })
+        }   
     }
 }
 
