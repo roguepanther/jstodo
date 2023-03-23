@@ -29,7 +29,7 @@
     const card = document.createElement('div')
     card.classList.add('card');
     card.classList.add('text-bg-secondary')
-    card.style.width = '22rem'
+    card.style.width = '20rem'
     card.style.marginTop = '10px'
     card.classList.add = 'delete'
     const cardBody = document.createElement('div')
@@ -41,6 +41,12 @@
     removeIcon.style.marginLeft = '50px'
     removeIcon.setAttribute('id', 'delete')
     cardBody.appendChild(removeIcon)
+    const completeIcon = document.createElement('i')
+    completeIcon.classList.add('fa-solid')
+    completeIcon.classList.add('fa-check')
+    completeIcon.style.marginLeft = '25px'
+    completeIcon.setAttribute('id', 'completed')
+    cardBody.appendChild(completeIcon)
     card.appendChild(cardBody) 
     originalList.appendChild(card)
     userInput.value = ''
@@ -48,9 +54,16 @@
  
 //Function to remove a task on clicking the corresponding delete button 
 
-document.body.addEventListener('click', function(event){
+originalList.addEventListener('click', function(event){
     if(event.target.id == 'delete'){
         event.target.parentElement.parentElement.remove()
+    }
+})
+
+// Function to mark the task as complete (change color)
+originalList.addEventListener('click', function(event) {
+    if(event.target.id == 'completed'){
+        const newDiv = event.target.parentElement.classList.add('text-bg-success')
     }
 })
 
