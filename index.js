@@ -70,7 +70,8 @@ originalList.addEventListener('click', function(event){
     if(event.target.id == 'delete'){
         event.target.parentElement.parentElement.remove()
         let itemToBeRemoved = JSON.stringify(event.target.parentElement.innerText);
-        let localStorageArray = localStorage.getItem('tasks')
+        console.log(itemToBeRemoved)
+        removeFromLocalStorage(JSON.parse(itemToBeRemoved))
     }
 })
 
