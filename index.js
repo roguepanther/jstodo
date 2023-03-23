@@ -41,7 +41,7 @@
  function createCard(message){
     const card = document.createElement('div')
     card.classList.add('card');
-    card.classList.add('text-bg-secondary')
+    card.classList.add('text-bg-dark')
     card.style.width = '20rem'
     card.style.marginTop = '10px'
     card.classList.add = 'delete'
